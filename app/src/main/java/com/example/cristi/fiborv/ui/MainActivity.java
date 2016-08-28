@@ -14,22 +14,32 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cristi.fiborv.R;
-import com.example.cristi.fiborv.data.FiboSource;
+import com.example.cristi.fiborv.presenter.MainPresenter;
+import com.example.cristi.fiborv.presenter.MainPresenterImpl;
 
-import java.util.List;
+public class MainActivity extends AppCompatActivity implements MainView {
 
-public class MainActivity extends AppCompatActivity {
-
+    MainPresenter presenter;
     FiboAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        presenter = new MainPresenterImpl();
+        presenter.attach(this);
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         adapter = new FiboAdapter(new String[0]);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        presenter.detach();
+        super.onDestroy();
     }
 
     @Override
@@ -60,29 +70,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 EditText etInput = (EditText) customView.findViewById(R.id.user_input);
                 String input = etInput.getText().toString();
-                updateNValue(input);
+                presenter.onUserInput(input);
             }
         });
 
         builder.show();
     }
 
-    private void updateNValue(String input) {
-        try {
-            int nValue = Integer.parseInt(input);
-            List<Integer> newFiboSequence = FiboSource.getFibonacciSequence(nValue);
-            adapter.updateDataSet(intListToStringArray(newFiboSequence));
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, R.string.invalid_input_toast, Toast.LENGTH_LONG).show();
-        }
+    @Override
+    public void displaySequence(String[] sequence) {
+        adapter.updateDataSet(sequence);
     }
 
-    private String[] intListToStringArray(List<Integer> list) {
-        String[] arr = new String[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            arr[i] = String.valueOf(list.get(i));
-        }
-
-        return arr;
+    @Override
+    public void onInvalidInput() {
+        Toast.makeText(this, R.string.invalid_input_toast, Toast.LENGTH_LONG).show();
     }
 }
