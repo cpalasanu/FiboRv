@@ -6,6 +6,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
 
 import com.example.cristi.fiborv.RecyclerView.RecyclerViewInteraction;
+import com.example.cristi.fiborv.ui.MainActivity;
 
 import org.junit.Before;
 import org.junit.Rule;

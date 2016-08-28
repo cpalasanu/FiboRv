@@ -1,10 +1,12 @@
-package com.example.cristi.fiborv;
+package com.example.cristi.fiborv.ui;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.cristi.fiborv.R;
 
 public class FiboAdapter extends RecyclerView.Adapter<FiboAdapter.ViewHolder> {
 

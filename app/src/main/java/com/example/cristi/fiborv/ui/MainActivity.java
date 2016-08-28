@@ -1,9 +1,11 @@
-package com.example.cristi.fiborv;
+package com.example.cristi.fiborv.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
+import com.example.cristi.fiborv.R;
 
 public class MainActivity extends AppCompatActivity {
     String[] fibonacciSequence = new String[] {"0", "1" ,"1", "2", "3", "5", "8", "13", "21", "34", "55", "89", "144"};
