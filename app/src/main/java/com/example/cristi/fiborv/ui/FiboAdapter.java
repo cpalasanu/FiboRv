@@ -26,6 +26,11 @@ public class FiboAdapter extends RecyclerView.Adapter<FiboAdapter.ViewHolder> {
         this.dataSet = dataSet;
     }
 
+    public void updateDataSet(String[] dataSet) {
+        this.dataSet = dataSet;
+        notifyDataSetChanged();
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
