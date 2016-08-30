@@ -1,5 +1,6 @@
 package com.example.cristi.fiborv.data;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,20 +11,20 @@ public class FiboSource {
      * @return the longest Fibonacci sequence with the last value <= max
      * @throws IllegalArgumentException
      */
-    public static List<Integer> getFibonacciSequence(int max) throws IllegalArgumentException {
-        if (max < 0) throw new IllegalArgumentException("max must be >= 0");
+    public static List<BigInteger> getFibonacciSequence(BigInteger max) throws IllegalArgumentException {
+        if (max.compareTo(BigInteger.ZERO) < 0) throw new IllegalArgumentException("max must be >= 0");
 
-        List<Integer> sequence = new ArrayList<>();
-        sequence.add(0);
+        List<BigInteger> sequence = new ArrayList<>();
+        sequence.add(BigInteger.valueOf(0));
 
-        if (max > 1) {
-            long lastValue = 1;
-            while(lastValue <= Integer.MAX_VALUE && lastValue <= max) {
-                sequence.add((int) lastValue);
-                lastValue += sequence.get(sequence.size() - 2);
+        if (max.compareTo(BigInteger.valueOf(1)) > 0) {
+            BigInteger lastValue = BigInteger.valueOf(1);
+            while(lastValue.compareTo(max) < 0) {
+                sequence.add(lastValue);
+                lastValue = lastValue.add(sequence.get(sequence.size() - 2));
             }
-        } else if (max == 1) {
-            sequence.add(1);
+        } else if (max.compareTo(BigInteger.valueOf(1)) == 0) {
+            sequence.add(BigInteger.valueOf(1));
         }
 
         return sequence;

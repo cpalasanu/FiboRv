@@ -11,12 +11,22 @@ import com.example.cristi.fiborv.R;
 public class FiboAdapter extends RecyclerView.Adapter<FiboAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView index;
+        private TextView fiboNumber;
+
         public ViewHolder(View itemView) {
             super(itemView);
+
+            index = (TextView) itemView.findViewById(R.id.fibo_index);
+            fiboNumber = (TextView) itemView.findViewById(R.id.fibo_number);
         }
 
-        public TextView getTextView() {
-            return (TextView) this.itemView;
+        public TextView getFiboTextView() {
+            return fiboNumber;
+        }
+
+        public TextView getIndexTextView() {
+            return index;
         }
     }
 
@@ -40,7 +50,8 @@ public class FiboAdapter extends RecyclerView.Adapter<FiboAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.getTextView().setText(dataSet[position]);
+        holder.getIndexTextView().setText(String.valueOf(position));
+        holder.getFiboTextView().setText(dataSet[position]);
     }
 
     @Override

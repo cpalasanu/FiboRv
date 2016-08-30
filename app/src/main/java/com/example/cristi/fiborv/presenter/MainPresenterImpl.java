@@ -3,6 +3,7 @@ package com.example.cristi.fiborv.presenter;
 import com.example.cristi.fiborv.data.FiboSource;
 import com.example.cristi.fiborv.ui.MainView;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public class MainPresenterImpl implements MainPresenter {
@@ -21,18 +22,18 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void onUserInput(String input) {
         try {
-            int nValue = Integer.parseInt(input);
-            List<Integer> newFiboSequence = FiboSource.getFibonacciSequence(nValue);
+            BigInteger nValue = new BigInteger(input);
+            List<BigInteger> newFiboSequence = FiboSource.getFibonacciSequence(nValue);
             view.displaySequence(intListToStringArray(newFiboSequence));
         } catch (NumberFormatException e) {
             view.onInvalidInput();
         }
     }
 
-    private String[] intListToStringArray(List<Integer> list) {
+    private String[] intListToStringArray(List<BigInteger> list) {
         String[] arr = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
-            arr[i] = String.valueOf(list.get(i));
+            arr[i] = list.get(i).toString();
         }
 
         return arr;

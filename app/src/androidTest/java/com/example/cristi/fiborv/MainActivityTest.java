@@ -19,6 +19,7 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -71,25 +72,6 @@ public class MainActivityTest {
     }
 
     @Test
-    public void inputDialog_outOfRangeInput() {
-        // GIVEN
-        String outOfRangeInput = String.valueOf((long) Integer.MAX_VALUE + 1);
-        onView(withId(R.id.menu_set_n))
-                .perform(click());
-        onView(withId(R.id.user_input))
-                .perform(typeText(outOfRangeInput));
-
-        // WHEN
-        onView(withId(android.R.id.button1))
-                .perform(click());
-
-        // THEN
-        onView(withText(R.string.invalid_input_toast))
-                .inRoot(ToastMatcher.isToast())
-                .check(matches(isDisplayed()));
-    }
-
-    @Test
     public void recyclerView_displayFibonacciSequence_1() {
         checkRecyclerView(INPUT_1, DISPLAY_1);
     }
@@ -116,7 +98,7 @@ public class MainActivityTest {
                 .check(new RecyclerViewInteraction.ItemViewAssertion<String>() {
                     @Override
                     public void check(String item, View view, NoMatchingViewException e) {
-                        matches(withText(item)).check(view, e);
+                        matches(hasDescendant(withText(item))).check(view, e);
                     }
                 });
     }

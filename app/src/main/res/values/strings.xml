@@ -2,6 +2,6 @@
     <string name="app_name">FiboRv</string>
     <string name="menu_item">Set N</string>
     <string name="dialog_title">Set upper limit</string>
-    <string name="hint">0 – 2147483647</string>
-    <string name="invalid_input_toast">Please select a number between 0 and 2147483647</string>
+    <string name="hint">your number here</string>
+    <string name="invalid_input_toast">Please enter a positive number</string>
 </resources>
